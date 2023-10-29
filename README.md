@@ -1,0 +1,1 @@
+web app for small pizza local made with django
