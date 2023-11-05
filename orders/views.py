@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from .forms import LoginForm, RegisterForm
+from .models import Pizza, Order, OrderItem
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -39,3 +40,23 @@ def register_view(request, *args, **kwargs):
             return redirect('/')
     context = {"form": form}
     return render(request, "orders/register.html", context)
+
+def menu_view(request, *args, **kwargs):
+    pizzas = Pizza.objects.all()
+    context = {"pizzas":pizzas}
+    return render(request, "orders/menu.html", context)
+
+def add_to_cart_view(request, *args, **kwargs):
+    pizza_id = request.GET.get('pizza_id','')
+    size = request.GET.get('size','')
+    active_user_orders = Order.objects.filter(customer=request.user, is_ordered=False)
+    if not active_user_orders:
+        order = Order(customer=request.user, address="", is_ordered=False, is_done=False)
+        order.save()
+        order_item = OrderItem(order=order, pizza=Pizza.objects.get(pk=pizza_id), size=size)
+        order_item.save()
+    else:
+        order = active_user_orders[0]
+        order_item = OrderItem(order=order, pizza=Pizza.objects.get(pk=pizza_id), size=size)
+        order_item.save()
+    return redirect('/menu')

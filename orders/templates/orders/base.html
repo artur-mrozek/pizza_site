@@ -11,9 +11,10 @@
   <body>
     <div class="topnav">
       <a href='/'>Strona główna</a>
-      <a href="#menu">Menu</a>
+      <a href="/menu">Menu</a>
       {% if user.is_authenticated %}
       <a id="login-buttons" href='/logout'>Wyloguj</a>
+      <a id="login-buttons" href='/cart'>Koszyk</a>
       {% else %}
       <a id="login-buttons" href='/register'>Zarejestruj</a>
       <a id="login-buttons" href='/login'>Zaloguj</a>
