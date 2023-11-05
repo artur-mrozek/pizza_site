@@ -1,5 +1,7 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,13 +10,13 @@
   </head>
   <body>
     <div class="topnav">
-      <a href='/'>Strona głowna</a>
+      <a href='/'>Strona główna</a>
       <a href="#menu">Menu</a>
       {% if user.is_authenticated %}
-      <a href='/logout'>Wyloguj</a>
+      <a id="login-buttons" href='/logout'>Wyloguj</a>
       {% else %}
-      <a href='/login'>Zaloguj</a>
-      <a href='register'>Zarejestruj</a>
+      <a id="login-buttons" href='/register'>Zarejestruj</a>
+      <a id="login-buttons" href='/login'>Zaloguj</a>
       {% endif %}
     </div>
     {% block content %} replace me {% endblock content %}
