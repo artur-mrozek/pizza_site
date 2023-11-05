@@ -30,15 +30,41 @@ body {
   }
 
 .home-container {
-    font-size: 30px;
-    border: 2px dotted;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 18px;
-    border-radius: 10px;
-    text-align: center;
+  font-size: 30px;
+  border: 2px dotted;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pizza-container {
+  padding: 9px;
+  float: left;
+  position: relative;
+}
+
+.pizza-bottom {
+  margin-top: 10px;
+  font-size: 25px;
+}
+
+.pizza-name {
+  position: absolute;
+  bottom: 16px;
+}
+
+.pizza-bottom a {
+  text-decoration: none;
+  color: black;
+  float: right;
+  margin: 3px;
+  padding: 3px;
+  background-color: rgba(10, 187, 10, 0.801);
+  border-radius: 10px;
 }
 
 .form-container{

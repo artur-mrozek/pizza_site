@@ -1,11 +1,15 @@
 {% extends 'orders/base.html' %}
 {% block content %}
-{% for pizza in pizzas %}
-<div class="pizza-container">
-    <img src={{ pizza.image.url }} width=350, height=350>
-    <p>{{ pizza.name }}</p>
-    <a href="/add_to_cart?pizza_id={{pizza.id}}&size=M"> {{ pizza.price_medium_size }}</a>
-    <a href="/add_to_cart?pizza_id={{pizza.id}}&size=L"> {{ pizza.price_large_size }}</a>
-</div>
-{% endfor %}
+    <div class="menu-container">
+    {% for pizza in pizzas %}
+        <div class="pizza-container">
+            <img src={{ pizza.image.url }} width=350, height=350>
+            <div class="pizza-bottom">
+                <span class="pizza-name">{{ pizza.name }}</span>
+                <a href="/add_to_cart?pizza_id={{pizza.id}}&size=M"> {{ pizza.price_medium_size }} zł</a>
+                <a href="/add_to_cart?pizza_id={{pizza.id}}&size=L"> {{ pizza.price_large_size }} zł</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
 {% endblock content %}
