@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .forms import LoginForm, RegisterForm, AddressForm
 from .models import Pizza, Order, OrderItem
 from django.contrib.auth.decorators import login_required
+from django.utils.timezone import now
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -84,6 +85,7 @@ def cart_view(request, *args, **kwargs):
             current_order.address = request.POST['address']
             current_order.phone_number = request.POST['phone_number']
             current_order.is_ordered = True
+            current_order.timestamp = now()
             current_order.save()
             return redirect('/menu')
     context = {
@@ -109,7 +111,7 @@ def delete_item_view(request, *args, **kwargs):
 
 @login_required
 def orders_view(request, *args, **kwargs):
-    orders = Order.objects.filter(customer=request.user)
+    orders = Order.objects.filter(customer=request.user, is_ordered=True)
     orders_with_items = []
     if orders:
         for order in orders:
@@ -122,6 +124,7 @@ def orders_view(request, *args, **kwargs):
                     final_price += item.pizza.price_large_size
             final_price = round(final_price, 2)
             orders_with_items.append((order, order_items, final_price))
+    orders_with_items.reverse()
     context = {
         "orders": orders_with_items
     }

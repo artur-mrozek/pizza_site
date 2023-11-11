@@ -218,6 +218,10 @@ body {
   color: green;
 }
 
+.order-date {
+  font-size: 22px;
+}
+
 .form-container{
   border-radius: 25px;
   border: 2px solid #333;

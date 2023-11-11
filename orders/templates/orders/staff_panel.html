@@ -3,6 +3,7 @@
 <div class="staff-panel-container">
     {% for order in orders %}
         <div class="staff-panel-order-container">
+            <p class="order-date">{{ order.0.timestamp }}</p>
             {% for item in order.1 %}
                 <p class="staff-panel-item-container">
                     {% if item.size == "M" %}

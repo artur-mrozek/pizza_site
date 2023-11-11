@@ -15,6 +15,7 @@ class Order(models.Model):
     phone_number = models.IntegerField()
     is_ordered = models.BooleanField()
     is_done = models.BooleanField()
+    timestamp = models.DateTimeField(null=True)
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=False)
