@@ -45,6 +45,10 @@ body {
   padding: 9px;
   float: left;
   position: relative;
+  border: dotted 2px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.685);
+  margin: 5px;
 }
 
 .pizza-bottom {
@@ -58,12 +62,14 @@ body {
 }
 
 .pizza-bottom a {
+  font-size: 17px;
+  border: dotted 2px;
   text-decoration: none;
   color: black;
   float: right;
   margin: 3px;
   padding: 3px;
-  background-color: rgba(10, 187, 10, 0.801);
+  background-color: rgba(10, 187, 10, 0.719);
   border-radius: 10px;
 }
 
