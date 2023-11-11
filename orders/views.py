@@ -35,7 +35,7 @@ def register_view(request, *args, **kwargs):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+            user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'],first_name=request.POST["first_name"])
             user.save()
             login(request, user)
             return redirect('/')
@@ -53,7 +53,7 @@ def add_to_cart_view(request, *args, **kwargs):
     size = request.GET.get('size','')
     active_user_orders = Order.objects.filter(customer=request.user, is_ordered=False)
     if not active_user_orders:
-        order = Order(customer=request.user, address="", is_ordered=False, is_done=False)
+        order = Order(customer=request.user, address="", phone_number=0, is_ordered=False, is_done=False)
         order.save()
         order_item = OrderItem(order=order, pizza=Pizza.objects.get(pk=pizza_id), size=size)
         order_item.save()
@@ -82,6 +82,7 @@ def cart_view(request, *args, **kwargs):
         form = AddressForm(request.POST)
         if form.is_valid():
             current_order.address = request.POST['address']
+            current_order.phone_number = request.POST['phone_number']
             current_order.is_ordered = True
             current_order.save()
             return redirect('/menu')

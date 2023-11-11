@@ -12,6 +12,7 @@ class Pizza(models.Model):
 class Order(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     address = models.CharField(max_length=20)
+    phone_number = models.IntegerField()
     is_ordered = models.BooleanField()
     is_done = models.BooleanField()
 

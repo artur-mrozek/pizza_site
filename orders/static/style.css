@@ -115,6 +115,12 @@ body {
   font-size: 15px;
 }
 
+#id_phone_number::-webkit-outer-spin-button,
+#id_phone_number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .order-form input[type=submit] {
   width: 90%;
   background-color: #333;
