@@ -67,6 +67,67 @@ body {
   border-radius: 10px;
 }
 
+.cart-container {
+  text-align: center;
+}
+
+.cart-header {
+  font-size: 35px;
+}
+
+.cart-item-container {
+  width: 340px;
+  padding: 10px;
+  font-size: 25px;
+  border: dotted;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.685);
+}
+
+.cart-item-container a {
+  text-decoration: none;
+  color: red;
+}
+
+.final_price {
+  font-size: 30px;
+}
+
+.cart-bottom {
+  border: dotted;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 340px;
+  background-color: rgba(255, 255, 255, 0.685);
+  padding-bottom: 18px;
+}
+
+.order-form label {
+  font-size: 20px;
+}
+
+#id_address {
+  resize: none;
+  height: 60px;
+  width: 90%;
+  font-size: 15px;
+}
+
+.order-form input[type=submit] {
+  width: 90%;
+  background-color: #333;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
 .form-container{
   border-radius: 25px;
   border: 2px solid #333;

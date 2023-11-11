@@ -1,0 +1,33 @@
+{% extends 'orders/base.html' %}
+{% block content %}
+<div class="cart-container">
+    {% if cart %}
+    <p class="cart-header">Koszyk</p>
+    {% for item in cart %}
+    <div class="cart-item-container">
+        {% if item.size == "M" %}
+            Średnia
+            {{ item.pizza.name }}
+            {{ item.pizza.price_medium_size }} zł
+        {% else %}
+            Duża
+            {{ item.pizza.name }}
+            {{ item.pizza.price_large_size }} zł
+        {% endif %}
+        <a href="/delete_item?order_item_id={{ item.id }}">Usuń</a>
+    </div>
+    {% endfor %}
+    <div class="cart-bottom">
+        <p class="final_price">Cena: {{ final_price }} zł</p>
+        <div class="order-form">
+            <form method="POST"> {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Złóż zamówienie">
+            </form>
+        </div>
+    </div
+    {% else %}
+    <p class="cart-header">Jeszcze nic nie dodałeś do koszyka</p>
+    {% endif %}
+</div>
+{% endblock content %}
