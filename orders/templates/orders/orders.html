@@ -5,7 +5,7 @@
     <p class="orders-header">Zamówienia</p>
     {% for order in orders %}
         <div class="order-container">
-            <p class="order-date">{{ order.0.timestamp }}</p>
+            <div class="order-date">{{ order.0.timestamp }}</div>
             {% for item in order.1 %}
             <p class="order-item">
                 {% if item.size == "M" %}
