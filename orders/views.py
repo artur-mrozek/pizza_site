@@ -103,6 +103,8 @@ def delete_item_view(request, *args, **kwargs):
     if order_item.order.is_ordered:
         return redirect('/')
     order_item.delete()
+    if not OrderItem.objects.filter(order=order_item.order):
+        order_item.order.delete()
     return redirect('/cart')
 
 @login_required
@@ -120,8 +122,32 @@ def orders_view(request, *args, **kwargs):
                     final_price += item.pizza.price_large_size
             final_price = round(final_price, 2)
             orders_with_items.append((order, order_items, final_price))
-    print(orders_with_items)
     context = {
         "orders": orders_with_items
     }
     return render(request, "orders/orders.html", context)
+
+@login_required
+def staff_panel_view(request, *args, **kwargs):
+    if not request.user.is_staff:
+        return redirect('/')
+    orders = Order.objects.filter(is_done=False)
+    orders_with_items = []
+    if orders:
+        for order in orders:
+            order_items = OrderItem.objects.filter(order=order)
+            orders_with_items.append((order, order_items))
+    context = {
+        "orders": orders_with_items
+    }
+    return render(request, "orders/staff_panel.html", context)
+
+@login_required
+def make_order_done_view(request, *args, **kwargs):
+    if not request.user.is_staff:
+        return redirect('/')
+    order_id = request.GET.get('order_id','')
+    order = Order.objects.get(pk=order_id)
+    order.is_done = True
+    order.save()
+    return redirect('/staff_panel')

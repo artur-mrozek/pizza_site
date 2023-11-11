@@ -1,6 +1,7 @@
 {% extends "orders/base.html" %}
 {% block content %}
 <div class="orders-container">
+    {% if orders %}
     <p class="orders-header">Zamówienia</p>
     {% for order in orders %}
         <div class="order-container">
@@ -29,5 +30,8 @@
             </p>
         </div>
     {% endfor %}
+    {% else %}
+    <p class="orders-header">Nie złożyłeś jeszcze żadnego zamówienia</p>
+    {% endif %}
 </div>
 {% endblock content %}
