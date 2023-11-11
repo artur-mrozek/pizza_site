@@ -104,3 +104,24 @@ def delete_item_view(request, *args, **kwargs):
         return redirect('/')
     order_item.delete()
     return redirect('/cart')
+
+@login_required
+def orders_view(request, *args, **kwargs):
+    orders = Order.objects.filter(customer=request.user)
+    orders_with_items = []
+    if orders:
+        for order in orders:
+            order_items = OrderItem.objects.filter(order=order)
+            final_price = 0
+            for item in order_items:
+                if item.size == "M":
+                    final_price += item.pizza.price_medium_size
+                else:
+                    final_price += item.pizza.price_large_size
+            final_price = round(final_price, 2)
+            orders_with_items.append((order, order_items, final_price))
+    print(orders_with_items)
+    context = {
+        "orders": orders_with_items
+    }
+    return render(request, "orders/orders.html", context)

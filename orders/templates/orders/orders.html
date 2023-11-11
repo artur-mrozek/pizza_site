@@ -1,0 +1,33 @@
+{% extends "orders/base.html" %}
+{% block content %}
+<div class="orders-container">
+    <p class="orders-header">Zamówienia</p>
+    {% for order in orders %}
+        <div class="order-container">
+            {% for item in order.1 %}
+            <p class="order-item">
+                {% if item.size == "M" %}
+                    Średnia
+                {% else %}
+                    Duża
+                {% endif %}
+                {{ item.pizza.name }}
+            {% endfor %}
+            <p class="order-price">
+                {{ order.2 }} zł
+            </p>
+            <p class="order-address"> {{ order.0.address }}</p>
+            <p class="order-status">
+                Status: 
+                {% if order.0.is_done %}
+                    <span class="order-completed">Dostarczone</span>
+                {% else %}
+                    <span class="order-not-completed"> W trakcie realizacji</span>
+                {% endif %}
+            </p>
+            </p>
+            </p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

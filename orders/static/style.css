@@ -78,6 +78,7 @@ body {
 }
 
 .cart-header {
+  font-weight: bold;
   font-size: 35px;
 }
 
@@ -139,6 +140,49 @@ body {
   font-size: 20px;
 }
 
+.orders-header {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.orders-container {
+  text-align: center;
+}
+
+.order-container {
+  width: 340px;
+  padding: 10px;
+  font-size: 25px;
+  border: dotted;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.685);
+}
+
+.order-item {
+  font-size: 21px;
+}
+
+.order-price {
+  font-weight: bold;
+}
+
+.order-address {
+  font-size: 21px;
+}
+
+.order-status {
+  font-weight: bolder;
+}
+
+.order-completed {
+  color: green;
+}
+
+.order-not-completed {
+  color: orange
+}
 
 .form-container{
   border-radius: 25px;
