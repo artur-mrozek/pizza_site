@@ -131,7 +131,7 @@ def orders_view(request, *args, **kwargs):
 def staff_panel_view(request, *args, **kwargs):
     if not request.user.is_staff:
         return redirect('/')
-    orders = Order.objects.filter(is_done=False)
+    orders = Order.objects.filter(is_done=False, is_ordered=True)
     orders_with_items = []
     if orders:
         for order in orders:

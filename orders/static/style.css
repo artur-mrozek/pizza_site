@@ -184,6 +184,40 @@ body {
   color: orange
 }
 
+.staff-panel-order-container {
+  width: 300px;
+  padding: 5px;
+  font-size: 25px;
+  border: dotted 2px;
+  margin: 3px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.685);
+  float: left;
+}
+
+.staff-panel-item-container {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.staff-panel-address-container {
+  font-size: 20px;
+}
+
+.staff-panel-phone-number-container {
+  font-size: 16px;
+}
+
+.staff-panel-email-container{
+  font-size: 16px;
+}
+
+.complete-order {
+  text-decoration: none;
+  font-weight: bold;
+  color: green;
+}
+
 .form-container{
   border-radius: 25px;
   border: 2px solid #333;
