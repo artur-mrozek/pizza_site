@@ -14,7 +14,7 @@
             {{ item.pizza.name }}
             {{ item.pizza.price_large_size }} zł
         {% endif %}
-        <a href="/delete_item?order_item_id={{ item.id }}">Usuń</a>
+    <div><a href="/delete_item?order_item_id={{ item.id }}" onclick="return confirm('Usunąć z koszyka?')">Usuń</a></div>
     </div>
     {% endfor %}
     <div class="cart-bottom">
