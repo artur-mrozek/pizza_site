@@ -61,7 +61,8 @@ body {
   bottom: 16px;
 }
 
-.pizza-bottom a {
+.pizza-bottom div {
+  cursor: pointer;
   font-size: 17px;
   border: dotted 2px;
   text-decoration: none;
@@ -93,8 +94,8 @@ body {
   background-color: rgba(255, 255, 255, 0.685);
 }
 
-.cart-item-container a {
-  text-decoration: none;
+.delete-from-cart {
+  cursor: pointer;
   color: red;
 }
 
@@ -213,7 +214,7 @@ body {
 }
 
 .complete-order {
-  text-decoration: none;
+  cursor: pointer;
   font-weight: bold;
   color: green;
 }

@@ -5,6 +5,7 @@ from .forms import LoginForm, RegisterForm, AddressForm
 from .models import Pizza, Order, OrderItem
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
+from django.http import JsonResponse
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
@@ -50,19 +51,20 @@ def menu_view(request, *args, **kwargs):
 
 @login_required
 def add_to_cart_view(request, *args, **kwargs):
-    pizza_id = request.GET.get('pizza_id','')
-    size = request.GET.get('size','')
-    active_user_orders = Order.objects.filter(customer=request.user, is_ordered=False)
-    if not active_user_orders:
-        order = Order(customer=request.user, address="", phone_number=0, is_ordered=False, is_done=False)
-        order.save()
-        order_item = OrderItem(order=order, pizza=Pizza.objects.get(pk=pizza_id), size=size)
-        order_item.save()
-    else:
-        order = active_user_orders[0]
-        order_item = OrderItem(order=order, pizza=Pizza.objects.get(pk=pizza_id), size=size)
-        order_item.save()
-    return redirect('/menu')
+    if request.method == "POST":
+        pizza_id = request.POST.get('pizza_id','')
+        size = request.POST.get('size','')
+        active_user_orders = Order.objects.filter(customer=request.user, is_ordered=False)
+        if not active_user_orders:
+            order = Order(customer=request.user, address="", phone_number=0, is_ordered=False, is_done=False)
+            order.save()
+            order_item = OrderItem(order=order, pizza=Pizza.objects.get(pk=pizza_id), size=size)
+            order_item.save()
+        else:
+            order = active_user_orders[0]
+            order_item = OrderItem(order=order, pizza=Pizza.objects.get(pk=pizza_id), size=size)
+            order_item.save()
+        return JsonResponse({"success": True})
 
 @login_required
 def cart_view(request, *args, **kwargs):
@@ -96,18 +98,19 @@ def cart_view(request, *args, **kwargs):
     return render(request, "orders/cart.html", context)
 
 def delete_item_view(request, *args, **kwargs):
-    order_item_id = request.GET.get('order_item_id','')
-    order_item = OrderItem.objects.get(pk=order_item_id)
-    if not request.user.is_authenticated:
-        return redirect('/')
-    if order_item.order.customer.id is not request.user.id:
-        return redirect('/')
-    if order_item.order.is_ordered:
-        return redirect('/')
-    order_item.delete()
-    if not OrderItem.objects.filter(order=order_item.order):
-        order_item.order.delete()
-    return redirect('/cart')
+    if request.method == "POST":
+        order_item_id = request.POST.get('order_item_id','')
+        order_item = OrderItem.objects.get(pk=order_item_id)
+        if not request.user.is_authenticated:
+            return JsonResponse({"error": True})
+        if order_item.order.customer.id is not request.user.id:
+            return JsonResponse({"error": True})
+        if order_item.order.is_ordered:
+            return JsonResponse({"error": True})
+        order_item.delete()
+        if not OrderItem.objects.filter(order=order_item.order):
+            order_item.order.delete()
+        return JsonResponse({"succes": True})
 
 @login_required
 def orders_view(request, *args, **kwargs):
@@ -147,10 +150,11 @@ def staff_panel_view(request, *args, **kwargs):
 
 @login_required
 def make_order_done_view(request, *args, **kwargs):
-    if not request.user.is_staff:
-        return redirect('/')
-    order_id = request.GET.get('order_id','')
-    order = Order.objects.get(pk=order_id)
-    order.is_done = True
-    order.save()
-    return redirect('/staff_panel')
+    if request.method == "POST":
+        if not request.user.is_staff:
+            return JsonResponse({"error": True})
+        order_id = request.POST.get('order_id','')
+        order = Order.objects.get(pk=order_id)
+        order.is_done = True
+        order.save()
+        return JsonResponse({"success": True})

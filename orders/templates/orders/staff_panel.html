@@ -17,13 +17,8 @@
             <p class="staff-panel-address-container">Adres: {{ order.0.address }}</p>
             <p class="staff-panel-phone-number-container">Nr tel: {{ order.0.phone_number }}</p>
             <p class="staff-panel-email-container">Email: {{ order.0.customer.email }}</p>
-            <a class="complete-order" href="/make_order_done?order_id={{ order.0.id }}">Zrobione</a>
+            <div class="complete-order" onclick="completeOrder({{ order.0.id }})">Zrobione</div>
         </div>
     {% endfor %}
 </div>
-<script language="javascript">
-    setInterval(function(){
-       window.location.reload(1);
-    }, 10000);
-</script>
 {% endblock content %}

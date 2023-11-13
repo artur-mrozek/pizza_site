@@ -6,8 +6,8 @@
             <img src={{ pizza.image.url }} width=340, height=340>
             <div class="pizza-bottom">
                 <span class="pizza-name">{{ pizza.name }}</span>
-                <a href="/add_to_cart?pizza_id={{pizza.id}}&size=L" onclick="return confirm('Dodać do koszyka?')">32cm {{ pizza.price_large_size }} zł</a>
-                <a href="/add_to_cart?pizza_id={{pizza.id}}&size=M" onclick="return confirm('Dodać do koszyka?')">28cm {{ pizza.price_medium_size }} zł</a>
+                <div onclick="addToCart({{ pizza.id }}, 'L')">32cm {{ pizza.price_large_size }} zł</div>
+                <div onclick="addToCart({{ pizza.id }}, 'M')">28cm {{ pizza.price_medium_size }} zł</div>
             </div>
         </div>
     {% endfor %}
