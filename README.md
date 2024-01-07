@@ -1,1 +1,1 @@
-web app for small pizza local made with django
+Web app for ordering pizzas and managing orders made with Django.
